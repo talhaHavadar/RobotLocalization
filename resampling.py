@@ -50,6 +50,22 @@ class ResamplingWheel(object):
             self.max_weight = max(self.wheel)
             self.last_index = int(random.random() * self.length)
 
+    def set_wheel_data(self, data):
+        """
+        Sets the wheel data
+        """
+        if data is not None and isinstance(data, list):
+            self.wheel = data
+
+        self.length = len(self.wheel)
+        self.beta = 0.0
+        self.is_resampled = False
+        self.last_index = 0
+
+        if self.length > 0:
+            self.max_weight = max(self.wheel)
+            self.last_index = int(random.random() * self.length)
+
     def get_pick_index(self):
         """
         Returns an index value according to given data.
