@@ -193,6 +193,6 @@ if __name__ == "__main__":
             p3.append(p[SAMPLING.get_pick_index()])
         p = p3
         #enter code here, make sure that you output 10 print statements.
-        print("Time:", t)
+        # print("Time:", t)
         # pp(p)
         print("SSE:", eval(ROBOT, p))
