@@ -1,0 +1,145 @@
+"""
+MIT License
+
+Copyright (c) 2017 Talha Can Havadar
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+"""
+
+class Point(object):
+    """
+    A Point interface to provide essential functionalities
+    and modularity to module
+    """
+
+    def get_position(self):
+        """
+        Returns the all axis together as tuple
+        """
+        raise NotImplementedError
+
+    def get_x_axis(self):
+        """
+        Returns the x axis
+        """
+        raise NotImplementedError
+
+    def get_y_axis(self):
+        """
+        Returns the y axis
+        """
+        raise NotImplementedError
+
+    def get_z_axis(self):
+        """
+        Returns the z axis
+        """
+        raise NotImplementedError
+
+    def set_x_axis(self, x_axis):
+        """
+        Sets the x axis
+        """
+        raise NotImplementedError
+
+    def set_y_axis(self, y_axis):
+        """
+        Sets the y axis
+        """
+        raise NotImplementedError
+
+    def set_z_axis(self, z_axis):
+        """
+        Sets the z axis
+        """
+        raise NotImplementedError
+
+#pylint: disable=W0223
+class Point2D(Point):
+    """
+    A representation of Point interface with 2 axis
+    """
+    def __init__(self, x_, y_):
+        super().__init__()
+        self.x_axis = x_
+        self.y_axis = y_
+
+    def get_position(self):
+        """
+        Returns (x, y)
+        """
+        return (self.x_axis, self.y_axis)
+
+    def get_x_axis(self):
+        """
+        Returns the x axis
+        """
+        return self.x_axis
+
+    def get_y_axis(self):
+        """
+        Returns the y axis
+        """
+        return self.y_axis
+
+    def set_x_axis(self, x_axis):
+        """
+        Sets the x axis
+        """
+        self.x_axis = x_axis
+
+    def set_y_axis(self, y_axis):
+        """
+        Sets the y axis
+        """
+        self.y_axis = y_axis
+
+class Point3D(Point2D):
+    """
+    A representation of Point interface with 3 axis
+    """
+    def __init__(self, x_, y_, z_):
+        super().__init__(x_, y_)
+        self.z_axis = z_
+
+    def get_position(self):
+        """
+        Returns (x, y, z)
+        """
+        return (self.x_axis, self.y_axis, self.z_axis)
+
+    def get_z_axis(self):
+        """
+        Returns the z axis
+        """
+        return self.z_axis
+
+    def set_z_axis(self, z_axis):
+        """
+        Sets the z axis
+        """
+        self.z_axis = z_axis
+
+class Pose(object):
+    """
+    Holds the position qnd the orientation of the robot
+    """
+    def __init__(self, position: Point, orientation):
+        self.position = position
+        self.orientation = orientation
