@@ -22,6 +22,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
+REPR_3D = 0
+REPR_2D = 1
+REPR_UNKNOWN = -1
+
 class Point(object):
     """
     A Point interface to provide essential functionalities
@@ -138,8 +142,44 @@ class Point3D(Point2D):
 
 class Pose(object):
     """
-    Holds the position qnd the orientation of the robot
+    Holds the position and the orientation of the robot
     """
     def __init__(self, position: Point, orientation):
         self.position = position
         self.orientation = orientation
+
+    def set_orientation(self, orientation):
+        """
+        Sets the orientation
+        """
+        self.orientation = orientation
+
+    def set_position(self, position: Point):
+        """
+        Sets the position
+        """
+        self.position = position
+
+    def get_position(self):
+        """
+        Returns the position as a tuple (x, y) for 2D point (x, y, z) for 3D point
+        """
+        return self.position.get_position()
+
+    def get_orientation(self):
+        """
+        Returns the orientation
+        """
+        return self.orientation
+
+    def get_representation_type(self):
+        """
+        Returns the representation type of the pose.
+        REPR_2D, REPR_2D or REPR_UNKNOWN according to point type
+        """
+        if isinstance(self.position, Point2D):
+            return REPR_2D
+        elif isinstance(self.position, Point3D):
+            return REPR_3D
+        else:
+            return REPR_UNKNOWN
