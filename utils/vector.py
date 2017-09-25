@@ -22,10 +22,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
+from robot_localization.utils.point import Point2D
+
 class Vector2D(object):
 
-    def __init__(self, x=0.0, y=0.0, theta=0.0, magnitude=0.0):
-        self.x = x
-        self.y = y
-        self.theta = theta
-        self.magnitude = magnitude
+    def __init__(self, start_point=Point2D(0, 0), end_point=Point2D(0, 0)):
+        self.start_point = start_point
+        self.end_point = end_point
+
+UP = Vector2D(end_point=Point2D(1, 0))
+DOWN = Vector2D(end_point=Point2D(-1, 0))
+LEFT = Vector2D(end_point=Point2D(0, -1))
+RIGHT = Vector2D(end_point=Point2D(0, 1))
