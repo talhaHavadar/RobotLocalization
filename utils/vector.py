@@ -21,19 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
-from robot_localization.filters.filter import Filter
-from robot_localization.utils.vector import Vector2D
 
-class ParticleFilter(Filter):
+class Vector2D(object):
 
-    def __init__(self):
-        self.particle_count = 1000
-
-    def move_particles(self, vector: Vector2D):
-        pass
-
-    def extract_weights(self, reference_distances: list):
-        pass
-
-    def filter(self) -> list:
-        pass
+    def __init__(self, x=0.0, y=0.0, theta=0.0, magnitude=0.0):
+        self.x = x
+        self.y = y
+        self.theta = theta
+        self.magnitude = magnitude

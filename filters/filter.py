@@ -22,15 +22,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-class Vector2D(object):
-
-    def __init__(self, x=0.0, y=0.0, theta=0.0, magnitude=0.0):
-        self.x = x
-        self.y = y
-        self.theta = theta
-        self.magnitude = magnitude
-
-
 class Filter(object):
     world_size = 100.0
 
