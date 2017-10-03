@@ -22,6 +22,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
+from robot_localization.utils.vector import Vector2D
+
 REPR_3D = 0
 REPR_2D = 1
 REPR_UNKNOWN = -1
@@ -148,6 +150,17 @@ class Pose(object):
         self.position = position
         self.orientation = orientation
 
+
+    def move(self, vector: Vector2D):
+        if self.get_representation_type() == REPR_2D:
+            assert isinstance(vector, Vector2D)
+            assert vector.start_point.get_position() == (0, 0)
+            e_xy = vector.end_point.get_position()
+            new_xy = tuple(map(sum, zip(e_xy, self.get_position())))
+            self.set_position(Point2D(*new_xy))
+        else:
+            raise NotImplementedError()
+
     def set_orientation(self, orientation):
         """
         Sets the orientation
@@ -177,9 +190,9 @@ class Pose(object):
         Returns the representation type of the pose.
         REPR_2D, REPR_2D or REPR_UNKNOWN according to point type
         """
-        if isinstance(self.position, Point2D):
-            return REPR_2D
-        elif isinstance(self.position, Point3D):
+        if isinstance(self.position, Point3D):
             return REPR_3D
+        elif isinstance(self.position, Point2D):
+            return REPR_2D
         else:
             return REPR_UNKNOWN
