@@ -22,13 +22,58 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-from robot_localization.utils.point import Point2D
+from robot_localization.utils.point import Point2D, Point
+from math import sqrt
+
+class Vector(object):
+    """
+    A Vector interface to provide essential functionalities
+    and modularity to module
+    """
+
+    def get_start_point(self) -> Point:
+        """
+        Returns start point of the vector 
+        """
+        raise NotImplementedError
+
+    def get_end_point(self) -> Point:
+        """
+        Returns end point of the vector
+        """
+        raise NotImplementedError
+
+    def get_magnitude(self) -> float:
+        """
+        Returns the magnitude of the vector
+        """
+        raise NotImplementedError
 
 class Vector2D(object):
 
     def __init__(self, start_point=Point2D(0, 0), end_point=Point2D(0, 0)):
         self.start_point = start_point
         self.end_point = end_point
+
+    def get_start_point(self) -> Point2D:
+        """
+        Returns start point of the vector as Point2D instance
+        """
+        return self.start_point
+
+    def get_end_point(self) -> Point2D:
+        """
+        Returns end point of the vector as Point2D instance
+        """
+        return self.end_point
+
+    def get_magnitude(self) -> float:
+        """
+        Returns the magnitude of the vector
+        """
+        x_1, y_1 = self.get_start_point().get_position()
+        x_2, y_2 = self.get_end_point().get_position()
+        return sqrt(((x_2 - x_1) ** 2) + ((y_2 - y_1) ** 2))
 
 UP = Vector2D(end_point=Point2D(1, 0))
 DOWN = Vector2D(end_point=Point2D(-1, 0))

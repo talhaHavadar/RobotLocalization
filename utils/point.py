@@ -86,6 +86,17 @@ class Point2D(Point):
         self.x_axis = x_
         self.y_axis = y_
 
+    def __eq__(self, other):
+        """Overrides the default behaviour"""
+        if isinstance(other, self.__class__):
+            return self.__dict__ == other.__dict__
+        else:
+            return False
+
+    def __ne__(self, other):
+        """Overrides the default behaviour"""
+        return not self.__eq__(other)
+
     def get_position(self):
         """
         Returns (x, y)
@@ -124,6 +135,17 @@ class Point3D(Point2D):
         super().__init__(x_, y_)
         self.z_axis = z_
 
+    def __eq__(self, other):
+        """Overrides the default behaviour"""
+        if isinstance(other, self.__class__):
+            return self.__dict__ == other.__dict__
+        else:
+            return False
+
+    def __ne__(self, other):
+        """Overrides the default behaviour"""
+        return not self.__eq__(other)
+
     def get_position(self):
         """
         Returns (x, y, z)
@@ -159,7 +181,7 @@ class Pose(object):
             new_xy = tuple(map(sum, zip(e_xy, self.get_position())))
             self.set_position(Point2D(*new_xy))
         else:
-            raise NotImplementedError()
+            raise NotImplementedError
 
     def set_orientation(self, orientation):
         """
